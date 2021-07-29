@@ -1,0 +1,31 @@
+
+
+<script>
+    $('.selectId').on('change',function(){
+        var formfiled = $(this).val();
+
+        $.ajax({
+            url:"{{route('CategoryFormAjaxForm')}}",
+            type:"GET",
+            data:{formfiled:formfiled},
+            success:function(data){
+
+               var html = "";
+
+               $.each(data,function(key,v){
+                 html+= '<div class="row" style="width:100%">'+
+                          '<div class="col-md-6">'+v.title_one+' <input tyle="text" value="'+v.field_name_one+'" name="basic_name[]" readonly="" class="form-control"></div>'
+                          +'<div class="col-md-6">'+v.title_two+' <input tyle="text" placeholder="'+v.field_name_two+'" name="basic_value[]" class="form-control"></div>'
+                        //   +'<div class="col-md-4">'+'Status'+' <input tyle="text" placeholder="Status" name="basic_value[]" class="form-control"></div>'
+                        
+                           
+                      + '</div>';
+               })
+
+               $('.remove_basic').html(html);
+
+            }
+        })
+        
+    })
+</script>
